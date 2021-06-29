@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Axios from "../utils/Axios";
 import "./Signup.css";
 
+// This section creates a layout of object/ or a Blue print, and this is for mainly creating a user log in class
 export class Signup extends Component {
   state = {
     firstName: "",
@@ -28,6 +29,8 @@ export class Signup extends Component {
     confirmPasswordOnFocus: false,
   };
 
+
+// this area here is basically for when a section on the page is click and it if it equals fN,lN , etc use this function inside the if statement
   handleOnChange = (event) => {
     this.setState(
       {
@@ -59,6 +62,8 @@ export class Signup extends Component {
     );
   };
 
+
+// this section is handling the creation of the users password, and in doing so if the passwords do not match then throw an error, if they do match then dont throw a error message
   handleConfirmPasswordInput = () => {
     if (this.state.password !== this.state.confirmPassword) {
       this.setState({
@@ -72,6 +77,9 @@ export class Signup extends Component {
     }
   };
 
+
+// this section is still using some of the confirm password code to make sure there is still no error with the passwords matching incase the user decides/ accidentally alter the password before hitting the submit btn.
+// But not only is that being done here but also this is where code is use to implement the strength of the password creation.(isStrongPassword) Such as the need for a Capital Letter, a Number and special charaters,also that the password box isnt empty when being filled out.
   handlePasswordInput = () => {
     if (this.state.confirmPasswordOnFocus) {
       if (this.state.password !== this.state.confirmPassword) {
@@ -106,6 +114,8 @@ export class Signup extends Component {
     }
   };
 
+
+// This section is where the email input is being handled,this is also where(isEmail) is implemented so most of the code is done for use and makes our life a little simpler.. All that is going on here is if the email input is empty then throw the error email cannot be empty, if its not empty then it will go to else statement containing the (isEmail) function and run that hidden function i mentioned previously and if does not pass it will throw the "Please, enter a valid email!", if the email that was inputted correctly then it will throw no error.
   handleEmailInput = () => {
     if (this.state.email.length === 0) {
       this.setState({
@@ -126,6 +136,8 @@ export class Signup extends Component {
     }
   };
 
+
+// This area handles the users First and last name input,and for that some requirements will need to be met first that the input only contains alphabetical letters ONLY if it input contains any characters other than the alphabetical letter then throw the ERROR: can only have alphabetic letter, or if the field is empty  throw ERROR: Field cannot be empty
   handleFirstNameAndLastNameInput = (event) => {
     if (this.state[event.target.name].length > 0) {
       if (isAlpha(this.state[event.target.name])) {
@@ -146,6 +158,8 @@ export class Signup extends Component {
     }
   };
 
+
+  // this area handles the users created UserName and also has some requirements and restrictions also.First the Field cannot be empty and is required to be filled out, Second is (isAlphanumeric) function is implemented  so that the user Can only USE ALPHABETIC AND NUMERIC in this field while creating a UserName, if any characters that ARE NOT ALPHANUMERIC characters a ERROR will be throw :"Username can only have alphabet and number"
   handleUsernameInput = () => {
     if (this.state.username.length === 0) {
       this.setState({
@@ -184,7 +198,8 @@ export class Signup extends Component {
       toast.error(`${e.response.data.message}`);
     }
   };
-
+  
+// This area uses Onblur and every time you get out of focus from the input field, the event will trigger
   handleOnBlur = (event) => {
     // console.log(event.target.name);
     // console.log("handle onBlur Triggered");
@@ -225,6 +240,8 @@ export class Signup extends Component {
     }
   }
 
+
+// in this area every time you enter the input field on focus is triggered for that input field
   handleInputOnFocus = (event) => {
     if (!this.state[`${event.target.name}OnFocus`]) {
       this.setState({
@@ -232,7 +249,7 @@ export class Signup extends Component {
       });
     }
   };
-
+// this area renders the signup form to front end users
   render() {
     const {
       firstName,
